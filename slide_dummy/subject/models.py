@@ -14,7 +14,7 @@ class Chapter(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.subject.name}-{self.title}"
+        return f"{self.subject.name}: {self.title}"
 
 
 class Topic(models.Model):
@@ -23,7 +23,7 @@ class Topic(models.Model):
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.chapter.title}-{self.title}"
+        return f"{self.chapter.title}: {self.title}"
 
 
 class SubTopic(models.Model):
@@ -32,4 +32,4 @@ class SubTopic(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.topic.title}-{self.title}"
+        return f"{self.topic.title}: {self.title}"

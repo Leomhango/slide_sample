@@ -24,3 +24,6 @@ class SubjectAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Subject, SubjectAdmin)
+admin.site.register(Chapter)
+admin.site.register(Topic)
+admin.site.register(SubTopic)

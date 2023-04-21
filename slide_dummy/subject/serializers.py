@@ -2,31 +2,31 @@ from rest_framework import serializers
 from .models import Subject, Chapter, Topic, SubTopic
 
 
-class SubTopicSerializer(serializers.ModelSerializer):
+class SubTopicSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SubTopic
-        fields = ['id', 'title', 'content']
+        fields = '__all__'
 
 
-class TopicSerializer(serializers.ModelSerializer):
+class TopicSerializer(serializers.HyperlinkedModelSerializer):
     subtopics = SubTopicSerializer(many=True, read_only=True)
 
     class Meta:
         model = Topic
-        fields = ['id', 'title', 'content', 'subtopics']
+        fields = '__all__'
 
 
-class ChapterSerializer(serializers.ModelSerializer):
+class ChapterSerializer(serializers.HyperlinkedModelSerializer):
     topics = TopicSerializer(many=True, read_only=True)
 
     class Meta:
         model = Chapter
-        fields = ['id', 'title', 'description', 'topics']
+        fields = '__all__'
 
 
-class SubjectSerializer(serializers.ModelSerializer):
+class SubjectSerializer(serializers.HyperlinkedModelSerializer):
     chapters = ChapterSerializer(many=True, read_only=True)
 
     class Meta:
         model = Subject
-        fields = ['id', 'name', 'chapters']
+        fields = ['url', 'name', 'chapters']
