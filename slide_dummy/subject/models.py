@@ -11,7 +11,8 @@ class Subject(models.Model):
 class Chapter(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    subject = models.ForeignKey(
+        Subject, on_delete=models.CASCADE, related_name='chapters')
 
     def __str__(self):
         return f"{self.subject.name}: {self.title}"
@@ -20,7 +21,8 @@ class Chapter(models.Model):
 class Topic(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(max_length=255)
-    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+    chapter = models.ForeignKey(
+        Chapter, on_delete=models.CASCADE, related_name='topics')
 
     def __str__(self):
         return f"{self.chapter.title}: {self.title}"
@@ -29,7 +31,8 @@ class Topic(models.Model):
 class SubTopic(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(max_length=255)
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    topic = models.ForeignKey(
+        Topic, on_delete=models.CASCADE, related_name='subtopics')
 
     def __str__(self):
         return f"{self.topic.title}: {self.title}"
