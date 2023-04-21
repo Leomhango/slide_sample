@@ -7,16 +7,30 @@ class SubTopicInline(admin.StackedInline):
     extra = 1
 
 
+class TopicAdmin(admin.ModelAdmin):
+    inlines = [SubTopicInline]
+
+
+admin.site.register(Topic, TopicAdmin)
+
+
 class TopicInline(admin.StackedInline):
     model = Topic
     extra = 1
-    inlines = [SubTopicInline]
+    show_change_link = True
+
+
+class ChapterAdmin(admin.ModelAdmin):
+    inlines = [TopicInline]
+
+
+admin.site.register(Chapter, ChapterAdmin)
 
 
 class ChapterInline(admin.StackedInline):
     model = Chapter
     extra = 1
-    inlines = [TopicInline]
+    show_change_link = True
 
 
 class SubjectAdmin(admin.ModelAdmin):
@@ -24,6 +38,3 @@ class SubjectAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Subject, SubjectAdmin)
-admin.site.register(Chapter)
-admin.site.register(Topic)
-admin.site.register(SubTopic)
