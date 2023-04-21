@@ -10,7 +10,7 @@ class Subject(models.Model):
 
 class Chapter(models.Model):
     title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    description = models.TextField()
     subject = models.ForeignKey(
         Subject, on_delete=models.CASCADE, related_name='chapters')
 
@@ -20,7 +20,7 @@ class Chapter(models.Model):
 
 class Topic(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField(max_length=255)
+    content = models.TextField()
     chapter = models.ForeignKey(
         Chapter, on_delete=models.CASCADE, related_name='topics')
 
@@ -30,7 +30,7 @@ class Topic(models.Model):
 
 class SubTopic(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField(max_length=255)
+    content = models.TextField()
     topic = models.ForeignKey(
         Topic, on_delete=models.CASCADE, related_name='subtopics')
 
