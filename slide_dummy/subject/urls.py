@@ -3,10 +3,11 @@ from .views import (
     SubjectList, SubjectDetail,
     ChapterList, ChapterDetail,
     TopicList, TopicDetail,
-    SubTopicList, SubTopicDetail,
+    SubTopicList, SubTopicDetail, forms_view
 )
 
 urlpatterns = [
+    path("", forms_view, name="forms"),
     path('subjects/', SubjectList.as_view(), name='subject-list'),
     path('subjects/<int:pk>/', SubjectDetail.as_view(), name='subject-detail'),
     path('subjects/<int:subject_id>/chapters/',

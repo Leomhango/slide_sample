@@ -1,6 +1,10 @@
 from rest_framework import generics
+
 from .models import Subject, Chapter, Topic, SubTopic
 from .serializers import SubjectSerializer, ChapterSerializer, TopicSerializer, SubTopicSerializer
+from .forms import CreateChapter
+
+from django.shortcuts import render, redirect
 
 
 class SubjectList(generics.ListCreateAPIView):
@@ -50,3 +54,19 @@ class SubTopicList(generics.ListCreateAPIView):
 class SubTopicDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SubTopicSerializer
     queryset = SubTopic.objects.all()
+
+
+def forms_view(request):
+    if request.method == 'POST':
+        form = CreateChapter(request.POST)
+        if form.is_valid():
+            form.save()
+            # return redirect('')
+    else:
+        form = CreateChapter()
+
+    context = {
+        "form": form,
+    }
+
+    return render(request, 'forms.html', context)
